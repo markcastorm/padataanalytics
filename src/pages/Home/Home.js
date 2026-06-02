@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from '../../components/Navbar'
 import Hero from './components/Hero'
 import Introduction from "./components/Introduction";
-import NarrativeExpertise from "./components/NarrativeExpertise";
+import StrategicPillars from "./components/StrategicPillars";
 
 
 
@@ -14,7 +14,8 @@ function Home() {
         <Navbar/>
         <Hero/>
         <Introduction/>
-        <NarrativeExpertise/>
+        
+        <StrategicPillars/>
         
         
       
