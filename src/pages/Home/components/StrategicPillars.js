@@ -16,7 +16,8 @@ const services = [
     title: "Growth & Retention",
     statement: "Acquisition is expensive. Retention is profit.",
     desc: "Moving beyond 'last-click' metrics. We use predictive modeling and cohort analysis to identify which customers will drive your next year of growth.",
-    img: "https://images.unsplash.com/photo-1550741113-50749757364d?auto=format&fit=crop&q=80",
+    // NEW WORKING HD IMAGE:
+    img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2000", 
     tags: ["Predictive", "LTV Modeling"]
   },
   {
