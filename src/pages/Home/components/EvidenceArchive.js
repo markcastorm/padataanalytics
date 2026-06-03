@@ -1,125 +1,131 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { Plus, ArrowRight } from "lucide-react";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, BarChart3, Globe, Users } from "lucide-react";
 
 const evidence = [
   {
     id: "01",
     stat: "$722K",
     label: "Revenue Analysed",
-    title: "The Attribution Audit",
-    challenge: "Client spending across Google, Meta, and TikTok with zero visibility into actual profit attribution.",
-    outcome: "Identified 32% waste in TikTok spend. Reallocated to high-intent Search, doubling overall ROAS in 90 days."
+    title: "Attribution Audit",
+    challenge: "Fragmented tracking across 3 ad platforms.",
+    outcome: "Eliminated 32% waste, reallocating to high-performing search channels.",
+    icon: <BarChart3 size={24} />,
+    color: "#3ab5d8"
   },
   {
     id: "02",
     stat: "+45%",
-    label: "Retention Growth",
-    title: "Consumer Cohort Analysis",
-    challenge: "E-commerce brand assuming healthy growth while acquisition costs were silently climbing.",
-    outcome: "Analysis revealed 99% revenue from returning users. Built a new acquisition funnel targeting high-LTV lookalikes."
+    label: "Growth",
+    title: "Cohort Analysis",
+    challenge: "High churn rates in the D2C subscription layer.",
+    outcome: "Identified high-value segments; increased repeat purchase rate by 45%.",
+    icon: <Users size={24} />,
+    color: "#a8a6a1"
   },
   {
     id: "03",
     stat: "100%",
-    label: "Impact Transparency",
-    title: "NGO Monitoring System",
-    challenge: "A Nairobi-based NGO needing to prove programme efficacy to international institutional donors.",
-    outcome: "Built a real-time M&E system. Secured a 3-year funding extension within 4 months of implementation."
+    label: "NGO Impact",
+    title: "M&E Infrastructure",
+    challenge: "Manual data collection preventing grant scaling.",
+    outcome: "Full digitisation of field metrics; secured 3-year donor extension.",
+    icon: <Globe size={24} />,
+    color: "#f9f8f6"
   }
 ];
 
 const EvidenceArchive = () => {
+  const [hovered, setHovered] = useState(null);
+
   return (
-    <section className="bg-[#FBFBF9] py-24 md:py-40">
-      {/* SECTION HEADER */}
-      <div className="px-6 md:px-16 lg:px-24 mb-32">
-        <div className="flex items-center gap-4 mb-8">
-          <div className="w-12 h-[1px] bg-stone-300"></div>
-          <p className="text-[10px] uppercase tracking-[0.6em] text-stone-400 font-bold">Selected Evidence</p>
-        </div>
-        <h2 className="text-[#111] text-5xl md:text-8xl font-serif leading-tight">
-          Quantifying <span className="italic text-stone-400">Success.</span>
+    <section className="bg-[#0A0A0A] py-24 md:py-40 px-6 md:px-12 lg:px-24 overflow-hidden">
+      
+      {/* 1. SECTION HEADER - DRAMATIC DARK MODE */}
+      <div className="max-w-[1400px] mx-auto mb-20 md:mb-32">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="flex items-center gap-4 mb-6"
+        >
+          <span className="w-10 h-[1px] bg-[#3ab5d8]"></span>
+          <p className="text-[10px] uppercase tracking-[0.6em] text-[#3ab5d8] font-bold">The Evidence Vault</p>
+        </motion.div>
+        
+        <h2 className="text-white text-5xl md:text-8xl font-serif leading-[1.1]">
+          Proven <span className="italic text-stone-500">Outcomes.</span>
         </h2>
       </div>
 
-      {/* EVIDENCE BLOCKS */}
-      <div className="space-y-0">
+      {/* 2. INTERACTIVE GRID */}
+      <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
         {evidence.map((item, idx) => (
-          <div key={item.id} className="border-t border-stone-200 group">
-            <div className="max-w-[1800px] mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-[60vh]">
+          <motion.div
+            key={item.id}
+            onMouseEnter={() => setHovered(idx)}
+            onMouseLeave={() => setHovered(null)}
+            animate={{ 
+              opacity: hovered === null || hovered === idx ? 1 : 0.3,
+              scale: hovered === idx ? 1.02 : 1
+            }}
+            transition={{ duration: 0.5 }}
+            className="relative bg-stone-900/40 border border-white/5 p-10 md:p-14 rounded-sm flex flex-col justify-between min-h-[500px] group cursor-pointer overflow-hidden"
+          >
+            {/* Background Glow on Hover */}
+            <div 
+               className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-1000"
+               style={{ background: `radial-gradient(circle at center, ${item.color}, transparent 70%)` }}
+            />
+
+            <div>
+              <div className="flex justify-between items-start mb-12">
+                <div className="text-[#3ab5d8] opacity-60 group-hover:opacity-100 transition-opacity">
+                  {item.icon}
+                </div>
+                <span className="font-mono text-[10px] text-stone-600 uppercase tracking-widest">Case // {item.id}</span>
+              </div>
+
+              <h3 className="text-white text-6xl md:text-7xl font-serif italic mb-2 tracking-tighter group-hover:text-[#3ab5d8] transition-colors">
+                {item.stat}
+              </h3>
+              <p className="text-stone-400 text-[10px] uppercase tracking-[0.4em] font-bold mb-10">{item.label}</p>
               
-              {/* LEFT: THE STAT (PINNED FEEL) */}
-              <div className="lg:col-span-5 flex flex-col justify-center p-8 md:p-16 lg:p-24 border-r border-stone-200 bg-white/50 group-hover:bg-white transition-colors duration-700">
-                <motion.span 
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  className="font-mono text-xs text-stone-400 mb-8 block italic"
-                >
-                  Project Archive — {item.id}
-                </motion.span>
-                <motion.h3 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  className="text-7xl md:text-9xl font-serif italic text-[#111] leading-none mb-4"
-                >
-                  {item.stat}
-                </motion.h3>
-                <p className="text-[10px] uppercase tracking-[0.5em] font-bold text-[#3ab5d8]">
-                  {item.label}
+              <div className="space-y-6">
+                <h4 className="text-white text-xl font-serif border-b border-white/10 pb-4">{item.title}</h4>
+                <p className="text-stone-500 text-xs md:text-sm leading-relaxed uppercase tracking-wider line-clamp-3 group-hover:text-stone-300">
+                  {item.challenge}
                 </p>
               </div>
-
-              {/* RIGHT: THE NARRATIVE */}
-              <div className="lg:col-span-7 flex flex-col justify-center p-8 md:p-16 lg:p-24 space-y-12">
-                <div>
-                  <h4 className="text-2xl md:text-4xl font-serif text-[#111] mb-6">
-                    {item.title}
-                  </h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <div className="space-y-4">
-                      <p className="text-[9px] uppercase tracking-widest font-bold text-stone-400">The Challenge</p>
-                      <p className="text-stone-600 text-sm leading-relaxed">
-                        {item.challenge}
-                      </p>
-                    </div>
-                    <div className="space-y-4">
-                      <p className="text-[9px] uppercase tracking-widest font-bold text-[#3ab5d8]">The Outcome</p>
-                      <p className="text-stone-800 text-sm leading-relaxed font-medium">
-                        {item.outcome}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-8 border-t border-stone-100 flex justify-between items-center">
-                  <div className="flex gap-4">
-                    <span className="text-[8px] uppercase tracking-widest font-bold px-3 py-1 border border-stone-200 text-stone-400 rounded-full">Analysis</span>
-                    <span className="text-[8px] uppercase tracking-widest font-bold px-3 py-1 border border-stone-200 text-stone-400 rounded-full">Strategy</span>
-                  </div>
-                  <button className="flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] font-bold text-stone-400 hover:text-[#111] transition-colors group/btn">
-                    Details <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
-                  </button>
-                </div>
-              </div>
-
             </div>
-          </div>
+
+            <div className="mt-12 pt-8 border-t border-white/5 flex items-center justify-between">
+               <p className="text-[9px] text-[#3ab5d8] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0">
+                 Read Full Analysis
+               </p>
+               <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#3ab5d8] transition-all">
+                  <ArrowRight size={16} className="text-stone-500 group-hover:text-[#3ab5d8] transition-colors" />
+               </div>
+            </div>
+          </motion.div>
         ))}
       </div>
 
-      {/* BOTTOM FOOTER */}
-      <div className="border-t border-stone-200 py-20 px-8 flex justify-center bg-white">
-         <div className="text-center">
-            <p className="text-stone-400 text-xs uppercase tracking-widest mb-8">Ready to see these numbers in your business?</p>
-            <a href="#contact" className="group flex flex-col items-center">
-               <span className="font-serif text-4xl md:text-6xl italic text-[#111] mb-4 hover:text-[#3ab5d8] transition-colors cursor-pointer">Start the Audit</span>
-               <div className="w-12 h-12 rounded-full border border-stone-200 flex items-center justify-center group-hover:bg-[#111] transition-all duration-500">
-                  <Plus size={20} className="group-hover:text-white transition-colors" />
-               </div>
-            </a>
-         </div>
+      {/* 3. CENTERED CLOSING ACTION */}
+      <div className="mt-32 text-center">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          className="inline-block"
+        >
+          <p className="text-stone-600 text-[10px] uppercase tracking-[0.5em] mb-8 font-bold">
+            Data Architecture for the ambitious
+          </p>
+          <a href="#contact" className="text-white text-2xl md:text-4xl font-serif italic hover:text-[#3ab5d8] transition-colors border-b border-white/10 pb-2">
+            Initiate your transformation —
+          </a>
+        </motion.div>
       </div>
+
     </section>
   );
 };
