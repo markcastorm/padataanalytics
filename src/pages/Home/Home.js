@@ -5,7 +5,13 @@ import Introduction from "./components/Introduction";
 import StrategicPillars from "./components/StrategicPillars";
 import EvidenceArchive from "./components/EvidenceArchive";
 import IntelligenceBlueprint from "./components/IntelligenceBlueprint";
+import FounderAbout from "./components/FounderAbout";
+import GlobalImpact from "./components/GlobalImpact";
 import DigitalProducts from "./components/DigitalProducts";
+import TransformationLens from "./components/TransformationLens";
+
+
+
 
 
 
@@ -27,6 +33,10 @@ function Home() {
         {/* <TheProcessStack/> */}
         <IntelligenceBlueprint/> 
         <DigitalProducts/>
+        <TransformationLens/>
+        
+        {/* <FounderAbout/> */}
+        {/* <GlobalImpact/> */}
         
         
       
