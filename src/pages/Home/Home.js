@@ -5,6 +5,9 @@ import Introduction from "./components/Introduction";
 import StrategicPillars from "./components/StrategicPillars";
 import EvidenceArchive from "./components/EvidenceArchive";
 import IntelligenceBlueprint from "./components/IntelligenceBlueprint";
+import DigitalProducts from "./components/DigitalProducts";
+
+
 
 
 
@@ -22,7 +25,8 @@ function Home() {
         <StrategicPillars/>
         <EvidenceArchive/>
         {/* <TheProcessStack/> */}
-        <IntelligenceBlueprint/>
+        <IntelligenceBlueprint/> 
+        <DigitalProducts/>
         
         
       
