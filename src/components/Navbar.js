@@ -9,7 +9,7 @@ const navConfig = {
   ],
   rightLinks: [
     { label: "NGO Impact", href: "#ngo" },
-    { label: "About", href: "#about" },
+    { label: "About", href: "/about" },
   ],
   fullMenu: [
     { title: "Strategy", sub: "Data-driven roadmaps", img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80" },
@@ -19,7 +19,8 @@ const navConfig = {
   ]
 };
 
-const Navbar = () => {
+// Added variant prop: "dark" (default) or "light"
+const Navbar = ({ variant = "dark" }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -30,17 +31,25 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Adaptive Logic
+  // If we have scrolled, we always want white text (because the bg becomes black/80)
+  // If we haven't scrolled, we use white for dark pages and black for light pages.
+  const isTransparentLight = variant === "light" && !isScrolled;
+  const textColor = isTransparentLight ? "text-black" : "text-white";
+  const burgerBg = isTransparentLight ? "bg-black" : "bg-white";
+  const borderColor = isScrolled ? "border-white/10" : (variant === "light" ? "border-black/5" : "border-white/10");
+
   return (
     <>
       <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 px-6 md:px-12 ${
-        isScrolled ? "py-4 bg-black/80 backdrop-blur-lg border-b border-white/10" : "py-8 bg-transparent"
+        isScrolled ? "py-4 bg-black/80 backdrop-blur-lg border-b " + borderColor : "py-8 bg-transparent"
       }`}>
-        <div className="max-w-[1800px] mx-auto flex justify-between items-center text-white">
+        <div className={`max-w-[1800px] mx-auto flex justify-between items-center transition-colors duration-500 ${textColor}`}>
           
           {/* LEFT NAV */}
           <div className="hidden lg:flex gap-10 items-center">
             {navConfig.leftLinks.map(link => (
-              <a key={link.label} href={link.href} className="text-[10px] uppercase tracking-luxury font-medium hover:text-stone-400 transition-colors">
+              <a key={link.label} href={link.href} className={`text-[10px] uppercase tracking-luxury font-medium transition-colors ${isTransparentLight ? "hover:text-stone-500" : "hover:text-stone-400"}`}>
                 {link.label}
               </a>
             ))}
@@ -57,7 +66,7 @@ const Navbar = () => {
           <div className="flex gap-10 items-center">
             <div className="hidden lg:flex gap-10">
               {navConfig.rightLinks.map(link => (
-                <a key={link.label} href={link.href} className="text-[10px] uppercase tracking-luxury font-medium hover:text-stone-400 transition-colors">
+                <a key={link.label} href={link.href} className={`text-[10px] uppercase tracking-luxury font-medium transition-colors ${isTransparentLight ? "hover:text-stone-500" : "hover:text-stone-400"}`}>
                   {link.label}
                 </a>
               ))}
@@ -65,24 +74,23 @@ const Navbar = () => {
             
             {/* BURGER BUTTON */}
             <button onClick={() => setIsOpen(true)} className="group flex items-center gap-3">
-              <span className="text-[10px] uppercase tracking-luxury hidden sm:block group-hover:text-stone-400 transition-colors">Menu</span>
+              <span className={`text-[10px] uppercase tracking-luxury hidden sm:block transition-colors ${isTransparentLight ? "group-hover:text-stone-500" : "group-hover:text-stone-400"}`}>Menu</span>
               <div className="flex flex-col gap-1">
-                <span className="w-5 h-[1px] bg-white group-hover:w-8 transition-all"></span>
-                <span className="w-8 h-[1px] bg-white"></span>
+                <span className={`w-5 h-[1px] group-hover:w-8 transition-all ${burgerBg}`}></span>
+                <span className={`w-8 h-[1px] ${burgerBg}`}></span>
               </div>
             </button>
           </div>
         </div>
       </nav>
 
-      {/* FULL SCREEN OVERLAY */}
+      {/* FULL SCREEN OVERLAY - Always stays dark for luxury branding */}
       <AnimatePresence>
         {isOpen && (
           <motion.div 
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             className="fixed inset-0 z-[60] bg-[#050505] flex flex-col md:flex-row"
           >
-            {/* CLOSE BUTTON */}
             <button 
               onClick={() => setIsOpen(false)}
               className="absolute top-8 right-8 md:top-12 md:right-12 text-white z-[70] hover:rotate-90 transition-transform duration-500"
@@ -90,7 +98,6 @@ const Navbar = () => {
               <X size={40} strokeWidth={1} />
             </button>
 
-            {/* OVERLAY LEFT: IMAGES (70% WIDTH) */}
             <div className="hidden md:block w-[60%] h-full relative overflow-hidden bg-stone-900">
               <AnimatePresence mode="wait">
                 <motion.img
@@ -106,7 +113,6 @@ const Navbar = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-[#050505] to-transparent" />
             </div>
 
-            {/* OVERLAY RIGHT: LINKS (40% WIDTH) */}
             <div className="w-full md:w-[40%] h-full flex flex-col justify-center px-10 md:px-20 border-l border-white/5">
               <div className="space-y-8">
                 {navConfig.fullMenu.map((item, idx) => (
@@ -130,7 +136,6 @@ const Navbar = () => {
                 ))}
               </div>
 
-              {/* FOOTER INFO */}
               <div className="mt-20 pt-10 border-t border-white/10">
                 <p className="text-[9px] uppercase tracking-[0.4em] text-stone-500 mb-4 font-bold">Contact</p>
                 <a href="mailto:hello@padataanalytics.com" className="text-white hover:text-stone-400 transition-colors font-light tracking-wide">
