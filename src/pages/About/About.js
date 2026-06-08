@@ -7,6 +7,8 @@ import TheNorthStar from './components/TheNorthStar'
 import AnalystPhilosophy from './components/AnalystPhilosophy'
 import MethodologyDossier from './components/MethodologyDossier'
 import TechnicalHeritage from './components/TechnicalHeritage'
+import EthicalSpecialism from './components/EthicalSpecialism'
+import AboutCTA from './components/AboutCTA'
 
 
 function About() {
@@ -20,6 +22,8 @@ function About() {
         {/* <AnalystPhilosophy/> */}
         <MethodologyDossier/>
         <TechnicalHeritage/>
+        <EthicalSpecialism/>
+        <AboutCTA/>
         
         <Footer/>
       
