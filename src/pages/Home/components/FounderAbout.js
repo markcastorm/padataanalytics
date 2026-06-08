@@ -1,109 +1,108 @@
 import React from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 
 const FounderAbout = () => {
-  const { scrollYProgress } = useScroll();
-  
-  // Parallax for the portrait
-  const yImage = useTransform(scrollYProgress, [0.6, 1], ["0%", "20%"]);
-  const opacityText = useTransform(scrollYProgress, [0.7, 0.85], [0, 1]);
-
   return (
-    <section className="relative w-full bg-[#FAF9F6] py-32 md:py-64 px-6 md:px-16 lg:px-24 overflow-hidden border-t border-stone-200">
+    <section className="relative bg-[#FDFDFC] py-32 md:py-56 px-6 md:px-12 lg:px-24 overflow-hidden">
       
-      <div className="max-w-[1700px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center">
+      {/* 1. ARCHITECTURAL GRID (Subtle 1px Lines) */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.05]">
+        <div className="absolute top-0 left-1/4 w-[1px] h-full bg-black" />
+        <div className="absolute top-0 left-3/4 w-[1px] h-full bg-black" />
+      </div>
+
+      <div className="max-w-[1700px] mx-auto relative z-10">
         
-        {/* LEFT: THE PORTRAIT (The Human) */}
-        <div className="lg:col-span-5 relative group">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-            className="relative aspect-[3/4] md:aspect-[4/5] overflow-hidden bg-stone-200 shadow-2xl z-10"
-          >
-            <motion.img 
-              style={{ y: yImage }}
-              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=1200" 
-              className="w-full h-full object-cover grayscale contrast-[1.1] brightness-90 group-hover:brightness-100 transition-all duration-1000"
-              alt="Founder Portrait"
-            />
-            {/* Soft overlay to blend into the porcelain background */}
-            <div className="absolute inset-0 bg-stone-900/10 pointer-events-none" />
-          </motion.div>
-
-          {/* Decorative Framing */}
-          <div className="absolute -top-10 -left-10 w-32 h-32 border-t border-l border-stone-300 z-0 hidden md:block" />
-          <div className="absolute -bottom-10 -right-10 w-64 h-64 border-b border-r border-stone-200 z-0 hidden md:block" />
-        </div>
-
-        {/* RIGHT: THE NARRATIVE (The Mind) */}
-        <div className="lg:col-span-7 flex flex-col items-start z-20">
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
-          >
-            <span className="text-[10px] uppercase tracking-[0.6em] text-[#3ab5d8] font-bold block mb-12">
-              The Architect's Mindset
-            </span>
-            
-            <h2 className="text-[#111] text-5xl md:text-7xl lg:text-8xl font-serif leading-[1.05] tracking-tighter mb-12 max-w-4xl">
-              Data is a human language. <br />
-              <span className="italic text-stone-400 font-light">I simply translate it.</span>
-            </h2>
-
-            <div className="max-w-xl space-y-10">
-              <p className="text-stone-600 text-sm md:text-lg leading-relaxed font-light italic">
-                "Behind every dataset is a commercial objective or a mission outcome. My role is to remove the fog of technical complexity, providing the clarity required for decisive action."
-              </p>
-              
-              <div className="space-y-4">
-                 <p className="text-[#111] text-xs md:text-sm uppercase tracking-[0.2em] font-bold">
-                    Patience Anono — Founder & Lead Analyst
-                 </p>
-                 <p className="text-stone-400 text-[11px] leading-relaxed max-w-sm uppercase tracking-widest font-medium">
-                    Nairobi based. Serving a global network of e-commerce brands and NGOs with clinical precision.
-                 </p>
-              </div>
+        <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+          
+          {/* LEFT SIDE: THE CINEMATIC PORTRAIT */}
+          <div className="lg:col-span-5">
+            <div className="relative aspect-[3/4] overflow-hidden grayscale contrast-125 shadow-2xl">
+              <motion.img 
+                initial={{ scale: 1.1, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=1200" 
+                className="w-full h-full object-cover"
+                alt="Patience Anono - Lead Analyst"
+              />
+              {/* Overlay for depth */}
+              <div className="absolute inset-0 bg-black/5 mix-blend-multiply" />
             </div>
+            
+            {/* Metadata Footer for Image */}
+            <div className="mt-8 flex justify-between items-end">
+               <div>
+                  <p className="font-mono text-[9px] uppercase tracking-[0.4em] text-stone-400 mb-2">Ref_001 // Personnel</p>
+                  <p className="text-[#111] text-lg font-serif">Patience Anono</p>
+                  <p className="text-stone-500 text-[10px] uppercase tracking-widest">Founder & Lead Analyst</p>
+               </div>
+               <div className="text-right">
+                  <p className="font-mono text-[8px] uppercase tracking-widest text-stone-300">Nairobi, Kenya</p>
+               </div>
+            </div>
+          </div>
 
-            {/* INTERACTIVE SIGNATURE / CALL TO ACTION */}
-            <motion.div 
-              style={{ opacity: opacityText }}
-              className="mt-20 pt-10 border-t border-stone-200 w-full"
+          {/* RIGHT SIDE: THE EDITORIAL STORY */}
+          <div className="lg:col-span-7 lg:pt-20">
+            
+            {/* THE "VOGUE" QUOTE (Section 3.5 Audit) */}
+            <motion.h2 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="text-[#111] text-5xl md:text-8xl font-serif leading-[1.05] tracking-tighter mb-16"
             >
-               <div className="flex flex-wrap gap-12">
-                  <div className="space-y-1">
-                     <p className="text-[9px] uppercase tracking-widest text-stone-400 font-bold">Background</p>
-                     <p className="text-[11px] uppercase tracking-widest text-[#111] font-bold">Cybersecurity & Stats</p>
-                  </div>
-                  <div className="space-y-1">
-                     <p className="text-[9px] uppercase tracking-widest text-stone-400 font-bold">Specialism</p>
-                     <p className="text-[11px] uppercase tracking-widest text-[#111] font-bold">Predictive Modeling</p>
-                  </div>
-                  <div className="space-y-1">
-                     <p className="text-[9px] uppercase tracking-widest text-stone-400 font-bold">Impact</p>
-                     <p className="text-[11px] uppercase tracking-widest text-[#111] font-bold">12+ Global Partners</p>
-                  </div>
-               </div>
+              Data is cold. <br />
+              <span className="italic text-stone-300 font-light">Decisions are human.</span>
+            </motion.h2>
 
-               <div className="mt-16 group inline-block">
-                  <a href="#contact" className="flex items-center gap-6">
-                    <span className="font-serif text-3xl italic text-stone-300 group-hover:text-[#3ab5d8] transition-colors">Read the full story —</span>
-                    <div className="w-12 h-[1px] bg-stone-300 group-hover:w-20 group-hover:bg-[#3ab5d8] transition-all duration-700" />
-                  </a>
-               </div>
-            </motion.div>
-          </motion.div>
+            <div className="max-w-xl space-y-12">
+              
+              {/* THE "GAP" STORY (Section 4.5 Audit) */}
+              <div className="space-y-6">
+                <p className="text-stone-500 font-mono text-[10px] uppercase tracking-[0.5em] font-bold">The Philosophy</p>
+                <p className="text-[#111] text-lg md:text-2xl font-light leading-relaxed">
+                  "Most organizations have a massive gap between the data they collect and the decisions they make. I built PA Analytics to bridge that gap through technical rigour and strategic storytelling."
+                </p>
+              </div>
+
+              <div className="space-y-8 border-t border-stone-100 pt-12">
+                <p className="text-stone-500 text-sm md:text-base leading-loose">
+                  As the <span className="text-[#111] font-bold">Expert Guide</span>, Patience combines high-level data science with business consulting. Whether scaling e-commerce profit or proving NGO social impact, she brings order to chaos, providing the stability required for growth.
+                </p>
+
+                <div className="flex flex-wrap gap-12">
+                   <div className="space-y-2">
+                      <p className="font-mono text-[8px] uppercase tracking-widest text-stone-400 font-bold">Technical Stack</p>
+                      <p className="text-[10px] uppercase font-bold tracking-widest text-[#111]">Python / SQL / Power BI</p>
+                   </div>
+                   <div className="space-y-2">
+                      <p className="font-mono text-[8px] uppercase tracking-widest text-stone-400 font-bold">Global Scale</p>
+                      <p className="text-[10px] uppercase font-bold tracking-widest text-[#111]">12+ International Entities</p>
+                   </div>
+                </div>
+
+                {/* FINAL CALL TO ACTION */}
+                <div className="pt-10">
+                   <button className="group flex items-center gap-8 bg-[#111] text-white px-12 py-6 hover:bg-stone-800 transition-all duration-500">
+                      <span className="text-[10px] uppercase tracking-[0.5em] font-bold">Connect with the Lead Analyst</span>
+                      <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                   </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
         </div>
 
       </div>
 
-      {/* BACKGROUND ACCENT */}
-      <div className="absolute bottom-0 right-0 pointer-events-none opacity-[0.03] select-none translate-y-1/2">
-         <p className="text-[30vw] font-serif font-bold text-[#111] leading-none">PATIENCE</p>
+      {/* BACKGROUND DECORATION: OVERSIZED SERIAL NUMBER */}
+      <div className="absolute top-1/2 right-[-5%] -translate-y-1/2 opacity-[0.02] pointer-events-none select-none">
+         <h3 className="text-[30vw] font-serif font-black uppercase italic whitespace-nowrap leading-none">PA_ANALYTICS</h3>
       </div>
-
     </section>
   );
 };

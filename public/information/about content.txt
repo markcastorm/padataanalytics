@@ -1,0 +1,36 @@
+
+According to the Business Discovery Document, the About Page shouldn't just be a biography—it needs to function as the "Expert Guide" manifesto. It is where you move from "What we do" to "Who we are and why we can be trusted with your most sensitive data."
+Maintaining our Luxury / High-Tech Boutique theme (Black, White, and Stone), here are the components for the About Page in order:
+1. AboutHero.js (The Persona)
+Focus: Section 1.3 (The "Expert Guide").
+Design: Ultra-minimalist. Large Serif typography on a white background.
+Content: "Intelligence with a Human Signature." A bold statement that positions PA Analytics as a specialist partner, not a cold agency.
+2. TheNorthStar.js (Mission & Vision)
+Focus: Section 1.2.
+Design: Dark Mode (Luxury Black).
+Content: This section addresses The Problem (The data-decision gap) and The Solution (Technical analysis + Strategic communication). It uses the "Order to Chaos" visual metaphor.
+3. FounderManifesto.js (Patience Anono Deep-Dive)
+Focus: Section 1.1 and 1.3.
+Design: White "Gallery" style.
+Content: A more personal look at Patience. It explains her "Specialist Partner" approach and her philosophy that "Data -> Decisions -> Growth." This builds the "Peace of Mind" trust mentioned in Section 3.5.
+4. TechnicalHeritage.js (The Full-Stack Proof)
+Focus: Section 1.5 and 4.1.
+Design: Technical/Dark.
+Content: A showcase of the "Full-Stack Capability." Instead of just icons, we list the 11+ services (SEO to Python Modeling) as a "Technical Toolkit." This is your "Hard Proof" layer.
+5. EthicalIntelligence.js (The Soul)
+Focus: Section 1.4 and 2.5.
+Design: Pure White / Clean.
+Content: Explicitly detailing the NGO sector focus. This is where you explain the "Ethical Intelligence" brand and the social responsibility mission to prove impact.
+6. NairobiBase.js (The Global/Local Pride)
+Focus: Section 4.6 (Nairobi Pride).
+Design: Luxury Stone/Grey.
+Content: Celebrating the Nairobi HQ. "Operating globally, rooted in Nairobi." This satisfies the Local SEO requirement while maintaining international appeal.
+7. AboutCTA.js (The Frictionless Trigger)
+Focus: Path A (The High-Ticket Consultant).
+Design: High-Contrast Black.
+Content: The final push to "Book a Free Discovery Call."
+Before we code: The "AboutHero.js" Concept
+For a Luxury About Hero, I recommend:
+Imagery: A very high-end, abstract black-and-white photo of a "Bridge" or "Architectural detail" to represent bridging the gap.
+Text: We don't say "About Us." We say something like "The Bridge Between Data and Decision."
+Shall we start building the AboutHero.js first? (I will keep it in the Black/White/Luxury style you requested).

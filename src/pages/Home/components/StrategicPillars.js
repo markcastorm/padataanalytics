@@ -1,32 +1,51 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { ArrowUpRight, Plus } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 const services = [
   {
     num: "01",
-    title: "E-Commerce Intelligence",
+    title: "Growth Intelligence",
     statement: "Your ad spend is bleeding. We stop it.",
     desc: "We bridge the gap between Meta, Google, and your actual warehouse data. No more guessing ROAS—we provide a single, clinical source of truth.",
     img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80",
-    tags: ["D2C Strategy", "Attribution"]
+    tags: ["D2C Strategy", "Attribution"],
+    stack: "GA4, HubSpot, Meta Ads",
+    price: "From $150 - $350",
+    result: "Stop wasting ad spend on channels that aren't converting."
   },
   {
     num: "02",
-    title: "Growth & Retention",
+    title: "Predictive Analytics",
     statement: "Acquisition is expensive. Retention is profit.",
     desc: "Moving beyond 'last-click' metrics. We use predictive modeling and cohort analysis to identify which customers will drive your next year of growth.",
-    // NEW WORKING HD IMAGE:
     img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2000", 
-    tags: ["Predictive", "LTV Modeling"]
+    tags: ["Predictive", "LTV Modeling"],
+    stack: "Python, Scikit-learn, SQL",
+    price: "From $300 - $450",
+    result: "Identify high-risk customers before they quit."
   },
   {
     num: "03",
+    title: "Decision Systems",
+    statement: "The automated boardroom.",
+    desc: "Replace manual spreadsheets with live, clinical dashboards. Custom-built infrastructure that turns raw data into actionable boardroom narratives.",
+    img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80", 
+    tags: ["BI Infra", "Automation"],
+    stack: "Power BI, Tableau, SQL",
+    price: "From $150/mo - $200",
+    result: "Boardroom-ready clarity in a single, automated view."
+  },
+  {
+    num: "04",
     title: "NGO Impact",
     statement: "Impact isn't an emotion. It's a metric.",
     desc: "Turning fieldwork into funder-ready evidence. We build the M&E systems and dashboards required to secure international grants.",
     img: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80",
-    tags: ["Impact Tracking", "Grant Logic"]
+    tags: ["Impact Tracking", "Grant Logic"],
+    stack: "Excel, Power BI, SQL",
+    price: "Tiered (Pro Bono - $300+)",
+    result: "Secure the next grant with funder-ready evidence."
   }
 ];
 
@@ -49,16 +68,11 @@ const StrategicPillars = () => {
         
         {/* LEFT SIDE: THE ANCHOR */}
         <div className="lg:w-[45%] lg:h-screen lg:sticky lg:top-0 flex flex-col justify-center p-8 md:p-16 lg:p-24 bg-[#FBFBF9] z-30">
-          {/* Progress Indicator */}
           <div className="absolute left-8 lg:left-12 top-1/4 bottom-1/4 w-[1px] bg-stone-200 hidden lg:block">
             <motion.div style={{ scaleY }} className="w-full bg-[#3ab5d8] origin-top h-full" />
           </div>
 
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            className="flex items-center gap-4 mb-10"
-          >
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="flex items-center gap-4 mb-10">
             <span className="text-[10px] uppercase tracking-[0.5em] font-bold text-stone-400">Section 02 — Pillars</span>
           </motion.div>
 
@@ -76,7 +90,7 @@ const StrategicPillars = () => {
           </div>
         </div>
 
-        {/* RIGHT SIDE: THE MOTION STORY */}
+        {/* RIGHT SIDE: REDUCED VERTICAL GAP */}
         <div className="lg:w-[55%] flex flex-col relative z-10">
           {services.map((service, idx) => (
             <ServiceBlock key={service.num} service={service} index={idx} />
@@ -94,15 +108,19 @@ const ServiceBlock = ({ service, index }) => {
     offset: ["start end", "end start"]
   });
 
-  // Parallax Values for deep depth
+  // Keep these parallax values, they work well with the tight layout
   const imgY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
-  const numY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
-  const cardY = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
+  const numY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]); // Reduced slightly
+  const cardY = useTransform(scrollYProgress, [0, 1], ["8%", "-8%"]); // Reduced slightly
 
   return (
-    <div ref={blockRef} className="relative w-full min-h-screen flex items-center justify-center py-20 px-6 lg:px-20 overflow-hidden border-b border-stone-100">
+    <div 
+      ref={blockRef} 
+      // Changed from min-h-screen py-20 to min-h-[75vh] py-12
+      className="relative w-full min-h-[75vh] flex items-center justify-center py-12 px-6 lg:px-20 overflow-hidden border-b border-stone-100"
+    >
       
-      {/* Ghost Number (Slow Parallax) */}
+      {/* Ghost Number Backdrop */}
       <motion.div style={{ y: numY }} className="absolute top-20 left-10 lg:left-20 select-none z-0">
         <span className="text-[30vw] font-serif italic text-stone-100/60 leading-none">
           {service.num}
@@ -110,28 +128,25 @@ const ServiceBlock = ({ service, index }) => {
       </motion.div>
 
       <div className="relative z-10 w-full max-w-4xl">
-        {/* Mobile Title */}
-        <h3 className="lg:hidden text-4xl font-serif mb-8">{service.title}</h3>
-
         <div className="relative flex flex-col items-center">
           
-          {/* Main Visual Frame */}
+          {/* Main Visual Frame (Sizes kept original) */}
           <div className="relative w-full lg:w-[85%] aspect-[16/10] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.2)] bg-stone-200">
              <motion.img 
                style={{ y: imgY }}
                src={service.img} 
                className="absolute inset-0 w-full h-[130%] object-cover grayscale brightness-90 hover:grayscale-0 hover:brightness-100 transition-all duration-1000 ease-out"
+               alt={service.title}
              />
-             {/* Dynamic Dark Gradient */}
              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
           </div>
 
-          {/* Overlapping Narrative Card */}
+          {/* Overlapping Card */}
           <motion.div 
             style={{ y: cardY }}
-            className="w-[90%] lg:w-[55%] bg-white p-8 lg:p-14 lg:absolute lg:right-0 lg:-bottom-20 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.15)] z-20"
+            className="w-[90%] lg:w-[55%] bg-white p-8 lg:p-10 lg:absolute lg:right-0 lg:-bottom-16 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.15)] z-20"
           >
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center justify-between mb-6">
                <div className="flex gap-2">
                   {service.tags.map(tag => (
                     <span key={tag} className="text-[8px] uppercase tracking-widest font-bold text-stone-400">
@@ -142,17 +157,33 @@ const ServiceBlock = ({ service, index }) => {
                <span className="font-serif italic text-stone-200 text-2xl">0{index + 1}</span>
             </div>
 
-            <h3 className="hidden lg:block text-2xl font-serif mb-6 text-stone-300 tracking-tight">
+            <h3 className="hidden lg:block text-2xl font-serif mb-4 text-stone-300 tracking-tight">
                {service.title}
             </h3>
 
-            <h4 className="font-serif text-2xl lg:text-3xl italic mb-6 leading-[1.2] text-[#111]">
+            <h4 className="font-serif text-2xl lg:text-3xl italic mb-4 leading-[1.2] text-[#111]">
                "{service.statement}"
             </h4>
 
-            <p className="text-stone-500 text-sm leading-relaxed mb-10 font-light">
+            <p className="text-stone-500 text-sm leading-relaxed mb-6 font-light">
               {service.desc}
             </p>
+
+            <div className="grid grid-cols-2 gap-4 border-y border-stone-100 py-4 mb-6">
+               <div>
+                  <p className="text-[8px] uppercase tracking-widest text-stone-400 font-bold mb-1">Stack</p>
+                  <p className="text-xs font-mono text-stone-700">{service.stack}</p>
+               </div>
+               <div>
+                  <p className="text-[8px] uppercase tracking-widest text-stone-400 font-bold mb-1">Investment</p>
+                  <p className="text-sm font-serif text-[#111] font-medium">{service.price}</p>
+               </div>
+            </div>
+
+            <div className="bg-[#1A1A1A] p-4 mb-8">
+               <p className="text-[8px] uppercase tracking-[0.2em] text-[#3ab5d8] font-bold mb-1">Result</p>
+               <p className="text-white text-xs font-serif italic">"{service.result}"</p>
+            </div>
 
             <button className="group flex items-center gap-6">
                <span className="text-[10px] uppercase tracking-[0.4em] font-bold border-b border-stone-100 pb-1 group-hover:border-stone-800 transition-all">

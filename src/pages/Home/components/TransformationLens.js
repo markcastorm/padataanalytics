@@ -10,7 +10,6 @@ const TransformationLens = () => {
     offset: ["start start", "end end"]
   });
 
-  // Smoothing the scroll values for a "silky" feel
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
   const wipeWidth = useTransform(smoothProgress, [0.1, 0.9], ["0%", "100%"]);
@@ -26,15 +25,14 @@ const TransformationLens = () => {
         {/* ========================================== */}
         <div className="absolute inset-0 w-full h-full bg-[#0A0A0A] px-8 md:px-24 flex items-center">
           <div className="w-full grid lg:grid-cols-2 gap-20 items-center">
-            <div className="opacity-20 flex flex-col gap-6">
-              <div className="h-[1px] w-20 bg-red-500/50" />
-              <h2 className="text-6xl md:text-8xl font-sans font-black text-stone-700 leading-none tracking-tighter">
+            <div className="opacity-40 flex flex-col gap-6">
+              <div className="h-[1px] w-20 bg-red-500/80" />
+              <h2 className="text-6xl md:text-8xl font-sans font-black text-stone-500 leading-none tracking-tighter">
                 FRAGMENTED <br /> GUESSWORK.
               </h2>
-              <p className="font-mono text-xs text-red-900 uppercase tracking-[0.5em]">System Status: Unverified / Noisy</p>
+              <p className="font-mono text-xs text-red-600 uppercase tracking-[0.5em] font-bold">System Status: Unverified / Noisy</p>
             </div>
             
-            {/* CHAOTIC DATA STREAM */}
             <div className="hidden lg:grid grid-cols-3 gap-2 opacity-10">
               {[...Array(9)].map((_, i) => (
                 <div key={i} className="h-20 border border-stone-800 rounded-sm bg-stone-900/50 animate-pulse" 
@@ -51,13 +49,11 @@ const TransformationLens = () => {
           style={{ width: wipeWidth }}
           className="absolute inset-0 h-full bg-[#FDFDFC] z-10 overflow-hidden border-r-2 border-[#3ab5d8] shadow-[20px_0_100px_rgba(58,181,216,0.2)]"
         >
-          {/* Subtle technical grid overlay for the "Truth" side */}
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: `radial-gradient(#111 1px, transparent 0)`, backgroundSize: '40px 40px' }} />
 
           <div className="absolute inset-0 w-screen h-full px-8 md:px-24 flex items-center">
             <div className="w-full grid lg:grid-cols-12 gap-10 items-center">
               
-              {/* LEFT: TEXT CONTENT */}
               <div className="lg:col-span-5 space-y-12">
                 <div className="space-y-6">
                   <motion.div className="flex items-center gap-4 text-[#3ab5d8]">
@@ -85,7 +81,7 @@ const TransformationLens = () => {
                 </div>
               </div>
 
-              {/* RIGHT: THE INTELLIGENCE INSTRUMENTS */}
+              {/* CARDS WITH ENHANCED SLIDE-IN ANIMATION */}
               <div className="lg:col-span-7 grid grid-cols-2 gap-4 md:gap-6">
                 <InstrumentCard 
                   progress={smoothProgress}
@@ -136,9 +132,7 @@ const TransformationLens = () => {
           style={{ left: handleX, opacity: lensOpacity }}
           className="absolute top-0 bottom-0 w-[1px] bg-[#3ab5d8] z-20 hidden lg:block"
         >
-          {/* Glowing Lead Edge */}
           <div className="absolute top-0 bottom-0 -left-1 w-2 bg-gradient-to-r from-[#3ab5d8]/40 to-transparent blur-sm" />
-          
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
              <div className="w-16 h-16 rounded-full bg-white border border-[#3ab5d8]/20 shadow-[0_0_40px_rgba(58,181,216,0.3)] flex items-center justify-center">
                 <div className="w-1.5 h-1.5 bg-[#3ab5d8] rounded-full animate-ping" />
@@ -154,18 +148,19 @@ const TransformationLens = () => {
   );
 };
 
-// ==========================================
-// SUB-COMPONENT: INSTRUMENT CARD
-// ==========================================
 const InstrumentCard = ({ progress, threshold, icon, label, title, value, desc }) => {
-  // Use scroll progress to "activate" the card when the lens passes it
-  const opacity = useTransform(progress, [threshold - 0.1, threshold], [0.1, 1]);
-  const scale = useTransform(progress, [threshold - 0.1, threshold], [0.95, 1]);
+  // ANIMATION LOGIC: The cards slide in from the right (x) and slightly from the bottom (y) 
+  // as the scroll progress approaches the threshold
+  const opacity = useTransform(progress, [threshold - 0.15, threshold], [0, 1]);
+  const scale = useTransform(progress, [threshold - 0.15, threshold], [0.8, 1]);
+  const x = useTransform(progress, [threshold - 0.2, threshold], [100, 0]);
+  const y = useTransform(progress, [threshold - 0.2, threshold], [20, 0]);
+  
   const borderOpacity = useTransform(progress, [threshold - 0.1, threshold], ["rgba(0,0,0,0.05)", "rgba(58,181,216,0.3)"]);
 
   return (
     <motion.div 
-      style={{ opacity, scale, borderColor: borderOpacity }}
+      style={{ opacity, scale, x, y, borderColor: borderOpacity }}
       className="p-8 bg-white border rounded-sm flex flex-col justify-between min-h-[220px] shadow-sm relative group cursor-crosshair transition-shadow duration-500 hover:shadow-xl"
     >
       <div className="flex justify-between items-start">
@@ -185,7 +180,6 @@ const InstrumentCard = ({ progress, threshold, icon, label, title, value, desc }
         </p>
       </div>
 
-      {/* Decorative Corner Accent */}
       <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-stone-100 group-hover:border-[#3ab5d8] transition-colors" />
     </motion.div>
   );
