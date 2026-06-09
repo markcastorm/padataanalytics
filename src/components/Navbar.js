@@ -4,7 +4,7 @@ import { X } from "lucide-react";
 
 const navConfig = {
   leftLinks: [
-    { label: "Services", href: "#services" },
+    { label: "Services", href: "/services" },
     { label: "Our Work", href: "#cases" },
   ],
   rightLinks: [
