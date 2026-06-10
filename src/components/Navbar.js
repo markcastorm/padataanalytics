@@ -5,7 +5,7 @@ import { X } from "lucide-react";
 const navConfig = {
   leftLinks: [
     { label: "Services", href: "/services" },
-    { label: "Our Work", href: "#cases" },
+    { label: "Our Work", href: "/ourwork" },
   ],
   rightLinks: [
     { label: "NGO Impact", href: "#ngo" },

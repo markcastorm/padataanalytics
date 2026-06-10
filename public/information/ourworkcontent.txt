@@ -1,0 +1,59 @@
+For the **"Our Work" (Case Study Gallery)** page, the goal is **Scientific Validation**. According to Section 3.2 of your document, this page is the primary entry point for "Path A" (High-Ticket Clients). They aren't looking for services here; they are looking for **Proof**.
+
+Section 4.5 of your PDF explicitly states: *"Do not just list the problem; every case study must highlight the Outcome in bold."*
+
+Here is the strategic outline of components for a luxurious, clinical **Our Work** page:
+
+---
+
+### 1. `EvidenceHero.js` (The Authority Entrance)
+*   **Strategy:** Immediate high-stakes validation.
+*   **Content:** Large-scale display of the **$722,000+ Revenue Analyzed** metric.
+*   **Vibe:** Luxurious Dark Mode. Minimalist. 
+*   **SEO:** "Proven Success in E-commerce Data Intelligence & NGO Impact."
+
+### 2. `MetricHorizon.js` (The Aggregate Proof)
+*   **Strategy:** Show the "Big Picture" before the individual stories.
+*   **Content:** A horizontal technical bar showing cumulative results: (e.g., +24% Avg Profit Lift, 92% Churn Accuracy, 100% Grant Compliance).
+*   **Vibe:** White/Stone background, high-precision technical "HUD" style.
+
+### 3. `SuccessGallery.js` (The Interactive Dossier Library)
+*   **Strategy:** The core of the page. Section 1.5 mentions **7+ Detailed Case Studies**.
+*   **Interaction:** A clinical, filterable grid (E-commerce / NGO / Strategic) that allows users to find proof relevant to *their* industry.
+*   **Logic:** Every card shows a "Teaser" image and a "Before/After" snapshot.
+*   **Click Trigger:** Opens the **`SuccessDossierModal.js`** (the most detailed modal we have built yet).
+
+### 4. `SuccessDossierModal.js` (The Deep Audit)
+*   **Strategy:** Satisfy the "Expert Guide" persona (Section 1.3).
+*   **Content:** 
+    *   The Challenge (The Gap).
+    *   The Intervention (Python/SQL stack used).
+    *   **The Outcome (In BOLD as per Section 4.5).**
+    *   Visual proof (Dashboard screenshots or abstract data maps).
+
+### 5. `MethodValidation.js` (The Tech-Outcome Link)
+*   **Strategy:** Remind the user *how* these results happen.
+*   **Content:** Tying specific successes to specific tools (e.g., "How we used Scikit-Learn to save Client X $14k/month").
+*   **Vibe:** Luxurious Dark mode, technical diagrams.
+
+### 6. `TrustEditorial.js` (The Human Signature)
+*   **Strategy:** Address the "Peace of Mind" factor (Section 3.5).
+*   **Content:** High-end editorial quotes from clients. 
+*   **Vibe:** White "Vogue-Business" style. Massive serif typography.
+
+### 7. `DiscoveryTrigger.js` (The Frictionless Exit)
+*   **Strategy:** Convert the trust into a call.
+*   **Content:** "Apply this clinical rigour to your operations."
+*   **Vibe:** Obsidian Black, high-intensity CTA.
+
+---
+
+### **The Luxury Design Goal for "Our Work":**
+Unlike the other pages, this one should feel like a **Technical Archive**. It shouldn't feel like a "Portfolio"; it should feel like an **Official Success Registry.**
+
+We will use:
+*   **Blueprint Borders:** Thin 1px lines surrounding every case study.
+*   **Status Indicators:** Small "Verified" or "Audit Complete" stamps on every project.
+*   **High-Contrast "Before/After":** Making the "Chaos vs Order" transformation visual.
+
+**Shall we begin by building the `EvidenceHero.js`?** (I will bring the most polished, luxurious dark design yet, using cinematic depth and technical annotations).
